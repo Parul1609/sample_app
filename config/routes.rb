@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'users/new'
 
+  get 'users/new'
+
   get 'static/pages'
   root             'static_pages#home'
   get 'help'    => 'static_pages#help'
