@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
  def show
   @user = User.find(params[:id])
-  # @user = User.new()
+   @user = User.new()
 
  end
 
@@ -12,14 +12,21 @@ class UsersController < ApplicationController
 def create
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+            @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
       # Handle a successful save.
-      redirect_to @user
-    else
+      #redirect_to user
+   else
       render 'new'
     end
 end
+# @user = User.new(params[:user])
+   # if @user.save
+    #else
+    #  render :action => 'new'
+  #end
+  #end
   private
 
     def user_params
