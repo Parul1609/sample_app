@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   
+  def index
+    @user = User.all.paginate(page: params[:page], per_page: 2)
+  end
+
  def show
   @user = User.find(params[:id])
-   @user = User.new()
+  @microposts = @user.microposts.paginate(page: params[:page])
+   #@user = User.new()
 
  end
 
